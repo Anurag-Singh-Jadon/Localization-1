@@ -27,10 +27,10 @@ const App = () => {
       }
       console.log("Selected Language",lngData)
   }
-  const onChangeLng =  (lng) => {
+  const onChangeLng =  async(lng) => {
     if (lng === 'en') {
       //I18nManager.forceRTL(false)
-      //await I18nManager.forceRTL(false)
+      await I18nManager.forceRTL(false)
       //strings.setLanguage(lng)
       setLng('en')
       RNRestart.Restart()
@@ -38,13 +38,22 @@ const App = () => {
     }
     if (lng === 'ol') {
        //I18nManager.forceRTL(true)
-      //await I18nManager.forceRTL(true)
+      await I18nManager.forceRTL(false)
       //strings.setLanguage(lng)
       
       setLng('ol')
       RNRestart.Restart()
       return;
     }
+    if (lng === 'ar') {
+      //I18nManager.forceRTL(true)
+     await I18nManager.forceRTL(true)
+     //strings.setLanguage(lng)
+     
+     setLng('ar')
+     RNRestart.Restart()
+     return;
+   }
    
   }
 
@@ -52,6 +61,10 @@ const App = () => {
   return (
   <View style={styles.container}>
     <View style={{flexDirection:'row',justifyContent:'space-around'}}>
+    <TouchableOpacity style={{width:wp('15%'),height:hp('5%'),backgroundColor:'yellow',alignItems:'center',justifyContent:"center"}}
+     onPress={()=>onChangeLng('ar')}>
+      <Text >Arabi</Text>
+    </TouchableOpacity>
     <TouchableOpacity style={{width:wp('15%'),height:hp('5%'),backgroundColor:'orange',alignItems:'center',justifyContent:'center'}}
     onPress={()=>onChangeLng('en')}>
       
@@ -63,9 +76,9 @@ const App = () => {
     </TouchableOpacity>
     </View>
     <View style={{width:wp('100%'),height:hp('20%'),}}>
-    <Text style={{fontSize:hp('5%')}}>{strings.PRIVACY_POLICY}</Text>
+    <Text style={{fontSize:hp('5%'),}}>{strings.PRIVACY_POLICY}</Text>
     </View>
-  <Text style={{fontSize:hp('5%')}}>{strings.TAP_AGREE_AND_CONTINUE_TO_CEEPT_THE}</Text>
+  <Text style={{fontSize:hp('5%'),}}>{strings.TAP_AGREE_AND_CONTINUE_TO_CEEPT_THE}</Text>
   </View>
   );
 };
